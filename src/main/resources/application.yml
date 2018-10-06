@@ -1,0 +1,36 @@
+server:
+  port: 8090
+  
+spring:
+  datasource:
+      type: com.zaxxer.hikari.HikariDataSource
+      url: jdbc:h2:file:./target/h2db/db/appointment;DB_CLOSE_DELAY=-1
+      username: appointment
+      password: appointment
+  h2:
+    console:
+      enabled: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: etabeb.noreply@gmail.com 
+    password:  ebooking_123
+    protocol: smtp
+
+
+appointment:
+    mail:
+        from: etabeb.noreply@gmail.com
+        base-url: localhost
+    swagger:
+        default-include-pattern: /api/.*
+        title: Appointment API
+        description: Appointment API documentation
+        version: 0.0.1
+        terms-of-service-url:
+        contact-name:
+        contact-url: 
+        contact-email: etabeb.noreply@gmail.com
+        license: 2.0
+        license-url:

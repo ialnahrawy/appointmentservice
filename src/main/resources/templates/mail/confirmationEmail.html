@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:text="#{email.confirmation.title}">Appointment Confirmation</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    </head>
+    <body>
+        <p th:text="#{email.confirmation.greeting}">
+            Dear MR/Madam,
+        </p>
+        <p th:text="#{email.confirmation.text1}">
+            Your appointment has been confirmed, please click on the URL below to access it:
+        </p>
+        <p>
+          
+            <a th:href="@{|${baseUrl}/#/appointment/${appointment.id}|}"
+             th:text="@{|${baseUrl}/#/appointment/${appointment.id}|}">Appointment link</a>
+            
+        </p>
+        <p>
+            <span th:text="#{email.confirmation.text2}">Regards, </span>
+            <br/>
+            <em th:text="#{email.signature}">eBooking Team</em>
+        </p>
+    </body>
+</html>
