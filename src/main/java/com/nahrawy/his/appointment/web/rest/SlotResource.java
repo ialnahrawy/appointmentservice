@@ -9,6 +9,7 @@ import com.nahrawy.his.appointment.web.rest.util.ResponseUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +18,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
@@ -69,13 +71,13 @@ public class SlotResource {
 
  
     @GetMapping(value ="/slots-for-doctor/{doctorId}", params = {"fromDate", "toDate"})
-    public List<SlotDTO> getAllSlots(@PathVariable Long doctorId, @RequestParam(value = "fromDate") LocalDate fromDate,
-            @RequestParam(required = false , value = "toDate") LocalDate toDate, @RequestParam(required = false) String filter ) {
+    public List<SlotDTO> getAllSlots(@PathVariable Long doctorId, @RequestParam(value = "fromDate")  @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss.SSSZ")   LocalDateTime  fromDate,
+            @RequestParam(required = false , value = "toDate")  @DateTimeFormat(pattern = "dd.MM.yyyy HH:mm:ss.SSSZ")  LocalDateTime toDate, @RequestParam(required = false) String filter ) {
     	
-		Instant fromInstant = fromDate.atStartOfDay(ZoneId.systemDefault()).toInstant();
+		Instant fromInstant = fromDate.atZone(ZoneId.systemDefault()).toInstant();
 		Instant toInstant = null;
 		if (toDate != null) {
-			toInstant = toDate.atStartOfDay(ZoneId.systemDefault()).plusDays(1).toInstant();
+			toInstant = toDate.atZone(ZoneId.systemDefault()).plusDays(1).toInstant();
 		}
   
         if ("status-not-cancelled".equals(filter)) {
